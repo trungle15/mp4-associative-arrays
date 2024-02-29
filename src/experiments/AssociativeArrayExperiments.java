@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 import structures.AssociativeArray;
 import structures.KeyNotFoundException;
+import structures.NullKeyException;
 
 /**
  * Experiments with our AssociativeArray class.
@@ -20,8 +21,9 @@ public class AssociativeArrayExperiments {
 
   /**
    * Run the experiments.
+   * @throws NullKeyException 
    */
-  public static void main(String[] args) {
+  public static void main(String[] args) throws NullKeyException {
     PrintWriter pen = new PrintWriter(System.out, true);
 
     divider(pen);
@@ -38,8 +40,9 @@ public class AssociativeArrayExperiments {
   /**
    * Our first experiment: Associative arrays with strings as both keys 
    * and values.
+   * @throws NullKeyException 
    */
-  public static void expreimentStringsToStrings(PrintWriter pen) {
+  public static void expreimentStringsToStrings(PrintWriter pen) throws NullKeyException {
     AssociativeArray<String,String> s2s = 
       new ReportingAssociativeArray<String,String>("s2s", pen);
     s2s.size();
@@ -63,8 +66,9 @@ public class AssociativeArrayExperiments {
   /**
    * Our second experiment: Associative arrays with big integers as
    * keys and values.
+   * @throws NullKeyException 
    */
-  public static void experimentBigIntToBigInt(PrintWriter pen) {
+  public static void experimentBigIntToBigInt(PrintWriter pen) throws NullKeyException {
     AssociativeArray<BigInteger,BigInteger> b2b =
       new ReportingAssociativeArray<BigInteger,BigInteger>("b2b", pen);
 

@@ -3,6 +3,7 @@ package experiments;
 import java.io.PrintWriter;
 import structures.AssociativeArray;
 import structures.KeyNotFoundException;
+import structures.NullKeyException;
 
 /**
  * An extension of the AssociativeArray class that reports each
@@ -46,8 +47,9 @@ public class ReportingAssociativeArray<K,V> extends AssociativeArray<K,V> {
 
   /**
    * Set a value.
+   * @throws NullKeyException 
    */
-  public void set(K key, V value) {
+  public void set(K key, V value) throws NullKeyException {
     pen.println(name + ".set(" + key + ", " + value + ")");
     super.set(key, value);
     pen.println("  " + name + ": " + this.toString());
