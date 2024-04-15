@@ -60,7 +60,7 @@ public class AssociativeArray<K, V> {
     AssociativeArray<K, V> newArray = new AssociativeArray<>();
     newArray.pairs = java.util.Arrays.copyOf(this.pairs, this.pairs.length);
     newArray.size = this.size;
-    return null;
+    return newArray;
   } // clone()
 
   /**
@@ -75,8 +75,8 @@ public class AssociativeArray<K, V> {
       results.append(" ").append(pairs[i].key).append(": ").append(pairs[i].value);
       if (i < size - 1) {
         results.append(",");
-      } 
-    }
+      } // if
+    } // for
     results.append(" }");
     return results.toString();
   } // toString()
@@ -92,26 +92,30 @@ public class AssociativeArray<K, V> {
   public void set(K key, V value) throws NullKeyException {
     if (key == null) {
       throw new NullKeyException();
-    }
-    for (int i = 0; i < size; i++) {
-      if (key.equals(pairs[i].key)) {
-        pairs[i].value = value;
-        return;
-      }
-    }
-    if (size == pairs.length) expand();
-    pairs[size++] = new KVPair<>(key, value);
+    } // if
+
+    try {
+      int index = find(key);
+      pairs[index].value = value;
+    } // try
+    catch (KeyNotFoundException e) {
+      if (size == pairs.length) {
+        expand();
+      } // if
+      pairs[size++] = new KVPair<>(key, value);
+    } // catch
   } // set(K,V)
 
   /**
    * Get the value associated with key.
    *
    * @throws KeyNotFoundException
-   *                              when the key is null or does not 
+   *                              when the key is null or does not
    *                              appear in the associative array.
    */
   public V get(K key) throws KeyNotFoundException {
-    if (key == null) throw new KeyNotFoundException();
+    if (key == null)
+      throw new KeyNotFoundException();
     return pairs[find(key)].value;
   } // get(K)
 
@@ -122,13 +126,14 @@ public class AssociativeArray<K, V> {
   public boolean hasKey(K key) {
     if (key == null) {
       return false;
-    }
+    } // if
     try {
       find(key);
       return true;
-    } catch (KeyNotFoundException e) {
+    } // try
+    catch (KeyNotFoundException e) {
       return false;
-    }
+    } // catch
   } // hasKey(K)
 
   /**
@@ -137,15 +142,17 @@ public class AssociativeArray<K, V> {
    * in the associative array, does nothing.
    */
   public void remove(K key) {
-    if (key == null) return; 
+    if (key == null)
+      return;
     try {
       int index = find(key);
       pairs[index] = pairs[size - 1];
       pairs[size - 1] = null;
       size--;
-    } catch (KeyNotFoundException e) {
+    } // try
+    catch (KeyNotFoundException e) {
       // Do nothing
-    }
+    } // catch
   } // remove(K)
 
   /**
