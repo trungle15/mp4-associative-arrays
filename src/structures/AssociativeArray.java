@@ -54,14 +54,18 @@ public class AssociativeArray<K, V> {
   // +------------------+
 
   /**
-   * Create a copy of this AssociativeArray.
+   * Create a deep copy of this AssociativeArray.
    */
+  @SuppressWarnings("unchecked")
   public AssociativeArray<K, V> clone() {
     AssociativeArray<K, V> newArray = new AssociativeArray<>();
-    newArray.pairs = java.util.Arrays.copyOf(this.pairs, this.pairs.length);
+    newArray.pairs = new KVPair[this.pairs.length]; // Allocate a new array
+    for (int i = 0; i < this.size; i++) {
+      newArray.pairs[i] = new KVPair<>(this.pairs[i].key, this.pairs[i].value);
+    } // for
     newArray.size = this.size;
     return newArray;
-  } // clone()
+  } // clone
 
   /**
    * Convert the array to a string.
@@ -185,5 +189,4 @@ public class AssociativeArray<K, V> {
     }
     throw new KeyNotFoundException();
   } // find(K)
-
 } // class AssociativeArray
