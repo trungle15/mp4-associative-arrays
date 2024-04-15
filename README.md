@@ -1,8 +1,11 @@
 Associative Arrays
 ==================
 
-Starter code for a project on associative arrays.
+Implementation of associative array data structure, including basic methods such as `get`, `set`, `remove` and `hasKey`.
 
-_Students should replace the contents of this file with appropriate
-contents, including author and date._
+## Authors
+- Samuel Rebelsky: Provided the template for associative array
+- Trung Le: Implemented associative array
 
+## Acknowledgement
+I would like to thank Professor Rebelsky for his template and guidance throughout the project.
